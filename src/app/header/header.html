@@ -1,0 +1,35 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__brand">
+      <div class="site-header__text">
+        <h1 class="site-header__title">
+          <a
+            class="site-header__title-link"
+            routerLink="/"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [class.is-disabled]="isBusy"
+            [attr.aria-disabled]="isBusy"
+            (click)="isBusy && $event.preventDefault()"
+          >{{ title }}</a>
+        </h1>
+      </div>
+    </div>
+
+    <nav class="site-header__menu" aria-label="Main navigation">
+      @for (item of menuItems; track item.text) {
+        <a
+          class="site-header__menu-link"
+          [routerLink]="item.routerLink"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [class.is-disabled]="isBusy"
+          [attr.aria-disabled]="isBusy"
+          (click)="isBusy && $event.preventDefault()"
+        >
+          {{ item.text }}
+        </a>
+      }
+    </nav>
+  </div>
+</header>
