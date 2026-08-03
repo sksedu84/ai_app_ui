@@ -1,1 +1,184 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #eef6ff;
+  --panel: #ffffff;
+  --panel-2: #f5faff;
+  --border: rgba(11, 27, 51, 0.14);
+  --text: #0b1b33;
+  --muted: rgba(11, 27, 51, 0.72);
+  --accent: #2563eb;
+  --accent-2: rgba(37, 99, 235, 0.14);
+  --shadow: 0 10px 26px rgba(11, 27, 51, 0.10);
+}
+
+.app {
+  max-width: none;
+  width: min(800px, calc(100% - 32px));
+  margin: 24px auto;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.app {
+  max-width: none;
+  width: min(800px, calc(100% - 32px));
+  margin: 24px auto;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.app__status {
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.app__output,
+.app__generated_sql,
+.app__input {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 22px rgba(11, 27, 51, 0.06);
+}
+
+.app__response {
+  height: 500px;
+  overflow-y: auto;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.user,
+.agent {
+  max-width: 78%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 14px rgba(11, 27, 51, 0.06);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.user {
+  align-self: flex-end;
+  background: rgba(37, 99, 235, 0.16);
+  border-color: rgba(37, 99, 235, 0.30);
+  color: var(--text);
+}
+
+.agent {
+  align-self: flex-start;
+  background: #ffffff;
+  color: var(--text);
+}
+
+.prompt {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.prompt__field {
+  flex: 1;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+  line-height: 1.4;
+  resize: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.prompt__field:focus {
+  border-color: rgba(37, 99, 235, 0.55);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+.prompt__field:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.prompt__submit {
+  align-self: stretch;
+  white-space: nowrap;
+  justify-self: unset;
+  padding: 0 18px;
+  min-height: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.65);
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 120ms ease, box-shadow 120ms ease, transform 120ms ease, border-color 120ms ease;
+}
+
+
+.prompt__submit:hover:enabled {
+  background: rgba(37, 99, 235, 0.10);
+  border-color: rgba(37, 99, 235, 0.30);
+  box-shadow: 0 10px 22px rgba(11, 27, 51, 0.08);
+}
+
+.prompt__submit:active:enabled {
+  transform: translateY(1px);
+}
+
+.prompt__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.prompt__submit:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.9);
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .site-header__inner {
+    padding: 14px 14px;
+    gap: 10px;
+  }
+
+  .prompt {
+    flex-direction: column;
+  }
+
+  .prompt__submit {
+    align-self: flex-start;
+    min-height: auto;
+  }
+}
+
+

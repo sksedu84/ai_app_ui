@@ -1,0 +1,101 @@
+.site-header {
+  position: relative;
+  top: 12px;
+  width: min(800px, calc(100% - 32px)) !important;
+  margin: 0 auto;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(219, 238, 255, 0.92);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.site-header__inner {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-header__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-header__title-link:hover {
+  text-decoration: none;
+}
+
+.site-header__title-link:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.9);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.site-header__menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.site-header__menu-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: var(--text);
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+
+.site-header__menu-link:hover,
+.site-header__menu-link.is-active {
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 10px 22px rgba(11, 27, 51, 0.08);
+}
+
+.site-header__menu-link:active {
+  transform: translateY(1px);
+}
+
+.site-header__menu-link:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.9);
+  outline-offset: 2px;
+}
+
+.site-header__title-link.is-disabled,
+.site-header__menu-link.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: auto;
+}

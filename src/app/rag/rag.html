@@ -1,0 +1,36 @@
+<main class="app">
+
+  <section class="app__output">
+    <div #responseBox class="app__response">
+      @if (mode === 'chat') {
+        @if (chatWithHistory.length > 0) {
+          @for (r of chatWithHistory; track $index) {
+            <div class="user" [innerHTML]="r.user"></div>
+            <div class="agent" [innerHTML]="r.agent"></div>
+          }
+        }
+      } @else if (mode === 'search') {
+        {{ response.searchResponse }}
+      }
+    </div>
+  </section>
+
+  <section class="app__input">
+    <form class="prompt" (ngSubmit)="sendPrompt()">
+      <textarea
+        name="userPrompt"
+        class="prompt__field"
+        rows="2"
+        placeholder="Your prompt goes here..."
+        [(ngModel)]="userPrompt"
+        [disabled]="isBusy"></textarea>
+
+      <button
+        type="submit"
+        class="prompt__submit"
+        [disabled]="!canPrompt">
+        {{ submitText }}
+      </button>
+    </form>
+  </section>
+</main>

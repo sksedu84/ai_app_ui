@@ -1,11 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { provideRouter, Router } from '@angular/router';
+import { routes } from './app.routes';
+import { Location } from '@angular/common';
 
 describe('App', () => {
+  let router: Router;
+  let location: Location;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)]
     }).compileComponents();
+
+    router = TestBed.inject(Router);
+    location = TestBed.inject(Location);
+    router.initialNavigation();
   });
 
   it('should create the app', () => {
@@ -14,10 +25,8 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ai_app_ui');
+  it('should navigate to /admin', async () => {
+    await router.navigate(['/admin']);
+    expect(location.path()).toBe('/admin');
   });
 });
