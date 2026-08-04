@@ -29,7 +29,7 @@ export const end_points = {
   CHAT_PROMPT: 'http://localhost:8000/chat/prompt',
   SEARCH_PROMPT: 'http://localhost:8000/search/prompt',
   ADMIN: 'http://localhost:8000/admin',
-  FILE_UPLOAD: 'http://localhost:8000/admin/file-upload',
+  FILE_UPLOAD: 'http://localhost:8000/admin/upload-files',
   REFRESH_DOCUMENT: 'http://localhost:8000/admin/refresh/document',
   REFRESH_DATABASE: 'http://localhost:8000/admin/refresh/database',
 } as const;
