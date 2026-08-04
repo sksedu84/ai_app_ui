@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {constants} from '../app.constants';
 import {ProcessingService} from '../services/processing.service';
 import {AdminService} from '../services/admin.service';
@@ -8,6 +9,8 @@ import {AdminResponse} from '../models/adminResponse';
   selector: 'app-admin',
   templateUrl: './admin.html',
   styleUrl: './admin.css',
+  standalone: true,
+  imports: [CommonModule]
 })
 export class Admin implements OnInit {
   readonly uploadFileText: string = constants.UPLOAD_FILE_TEXT;
@@ -23,6 +26,7 @@ export class Admin implements OnInit {
   constructor(
     private readonly processingService: ProcessingService,
     private readonly adminService: AdminService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -86,19 +90,20 @@ export class Admin implements OnInit {
   }
 
   private async initializeAdminPage(): Promise<void> {
-    /*try {
+    try {
       await this.processingService.runWithLoader('Loading uploaded files...', async () => {
         const response: AdminResponse = await this.adminService.loadAdmin();
         await this.loadUploadedFiles(response);
       });
     } catch (e) {
       console.error('Failed to initialize admin page.', e);
-    }*/
+    }
   }
 
   async loadUploadedFiles(response: AdminResponse): Promise<void> {
     try {
       this.uploadedFileNames = response.uploadedFiles ?? [];
+      this.cdr.markForCheck();
     } catch (e) {
       console.error('Failed to load uploaded files.', e);
       this.uploadedFileNames = [];
