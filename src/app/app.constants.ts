@@ -26,11 +26,11 @@ export const constants = {
 } as const;
 
 export const end_points = {
-  CHAT_PROMPT: 'http://localhost:8080/chat/prompt',
-  SEARCH_PROMPT: 'http://localhost:8080/search/prompt',
-  ADMIN: 'http://localhost:8080/admin',
-  FILE_UPLOAD: 'http://localhost:8080/admin/upload',
-  REFRESH_DOCUMENT: 'http://localhost:8080/admin/refresh/document',
-  REFRESH_DATABASE: 'http://localhost:8080/admin/refresh/database'
+  CHAT_PROMPT: 'http://localhost:8000/chat/prompt',
+  SEARCH_PROMPT: 'http://localhost:8000/search/prompt',
+  ADMIN: 'http://localhost:8000/admin',
+  FILE_UPLOAD: 'http://localhost:8000/admin/file-upload',
+  REFRESH_DOCUMENT: 'http://localhost:8000/admin/refresh/document',
+  REFRESH_DATABASE: 'http://localhost:8000/admin/refresh/database',
 } as const;
 
