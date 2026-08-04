@@ -6,10 +6,10 @@ export const constants = {
   HEADER_MENU_HYBRID_TEXT: 'Hybrid',
   HEADER_MENU_ADMIN_TEXT: 'Admin',
   ACCEPTABLE_FILE_TYPE:
-    '.pdf,.doc,.docx,.txt,.sql,application/pdf,' +
+    '.pdf,.doc,.docx,.txt,application/pdf,' +
     'application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,' +
-    'text/plain,application/sql,text/x-sql',
-  UPLOAD_FILE_TEXT: 'Upload files (PDF, DOC, DOCX, TXT, SQL)',
+    'text/plain',
+  UPLOAD_FILE_TEXT: 'Upload files (PDF, DOC, DOCX, TXT)',
   UPLOAD_BUTTON_TEXT: 'Upload',
   DATABASE_TEXT: 'Database',
   DOCUMENTS_TEXT: 'Documents',

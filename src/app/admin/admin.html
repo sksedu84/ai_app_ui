@@ -1,3 +1,48 @@
 <main class="app">
-Admin Works.
+  <section class="uploader">
+    <h2 class="uploader__title">{{ uploadFileText }}</h2>
+
+    <div class="uploader__controls">
+      <input
+        class="uploader__file"
+        type="file"
+        multiple
+        [accept]="acceptTypes"
+        (change)="onFilesSelected($event)"
+        [disabled]="isBusy"
+      />
+
+      <button
+        class="uploader__btn"
+        type="button"
+        [disabled]="!canUpload"
+        (click)="uploadSelectedFiles()"
+      >
+        {{ uploadButtonText }}
+      </button>
+    </div>
+
+    <p class="uploader__status">
+      {{ statusText }}
+    </p>
+
+    <ul class="uploader__list">
+      @for (fileName of uploadedFileNames; track fileName){
+        <li class="uploader__item">{{ fileName }}</li>
+      }
+    </ul>
+  </section>
+
+  <!--<section class="uploader">
+    <h2 class="uploader__title">{{ dataRefreshText }}</h2>
+
+    <div class="uploader__controls">
+      <button class="uploader__btn" type="button" [disabled]="isBusy" (click)="refreshDatabase()">
+        {{ databaseText }}
+      </button>
+      <button class="uploader__btn" type="button" [disabled]="isBusy" (click)="refreshDocuments()">
+        {{ documentsText }}
+      </button>
+    </div>
+  </section>-->
 </main>
