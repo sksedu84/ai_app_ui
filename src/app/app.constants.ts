@@ -6,10 +6,10 @@ export const constants = {
   HEADER_MENU_HYBRID_TEXT: 'Hybrid',
   HEADER_MENU_ADMIN_TEXT: 'Admin',
   ACCEPTABLE_FILE_TYPE:
-    '.pdf,.doc,.docx,.txt,.sql,application/pdf,' +
+    '.pdf,.doc,.docx,.txt,application/pdf,' +
     'application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,' +
-    'text/plain,application/sql,text/x-sql',
-  UPLOAD_FILE_TEXT: 'Upload files (PDF, DOC, DOCX, TXT, SQL)',
+    'text/plain',
+  UPLOAD_FILE_TEXT: 'Upload files (PDF, DOC, DOCX, TXT)',
   UPLOAD_BUTTON_TEXT: 'Upload',
   DATABASE_TEXT: 'Database',
   DOCUMENTS_TEXT: 'Documents',
@@ -26,11 +26,11 @@ export const constants = {
 } as const;
 
 export const end_points = {
-  CHAT_PROMPT: 'http://localhost:8080/chat/prompt',
-  SEARCH_PROMPT: 'http://localhost:8080/search/prompt',
-  ADMIN: 'http://localhost:8080/admin',
-  FILE_UPLOAD: 'http://localhost:8080/admin/upload',
-  REFRESH_DOCUMENT: 'http://localhost:8080/admin/refresh/document',
-  REFRESH_DATABASE: 'http://localhost:8080/admin/refresh/database'
+  CHAT_PROMPT: 'http://localhost:8000/chat/prompt',
+  SEARCH_PROMPT: 'http://localhost:8000/search/prompt',
+  ADMIN: 'http://localhost:8000/admin',
+  FILE_UPLOAD: 'http://localhost:8000/admin/file-upload',
+  REFRESH_DOCUMENT: 'http://localhost:8000/admin/refresh/document',
+  REFRESH_DATABASE: 'http://localhost:8000/admin/refresh/database',
 } as const;
 
