@@ -65,30 +65,6 @@ export class Admin implements OnInit {
     }
   }
 
-  async refreshDatabase(): Promise<void> {
-    if (this.isBusy) return;
-    try {
-      await this.processingService.runWithLoader('Refreshing database...', async () => {
-        const response: AdminResponse = await this.adminService.refreshDatabase();
-        await this.loadUploadedFiles(response);
-      });
-    } catch (e) {
-      console.error('Database refresh failed.', e);
-    }
-  }
-
-  async refreshDocuments(): Promise<void> {
-    if (this.isBusy) return;
-    try {
-      await this.processingService.runWithLoader('Refreshing documents...', async () => {
-        const response: AdminResponse = await this.adminService.refreshDocuments();
-        await this.loadUploadedFiles(response);
-      });
-    } catch (e) {
-      console.error('Document refresh failed.', e);
-    }
-  }
-
   private async initializeAdminPage(): Promise<void> {
     try {
       await this.processingService.runWithLoader('Loading uploaded files...', async () => {

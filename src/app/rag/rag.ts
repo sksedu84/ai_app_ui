@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { constants } from '../app.constants';
 import { PromptResponse } from '../models/promptResponse';
 import { ProcessingService } from '../services/processing.service';
@@ -11,22 +11,22 @@ import { PromptService } from '../services/prompt.service';
   imports: [FormsModule],
 })
 export class Rag implements OnInit {
-  readonly chatModeText: string = constants.CHAT_MODE_TEXT;
-  readonly searchModeText: string = constants.SEARCH_MODE_TEXT;
+  readonly ragModeText: string = constants.RAG_MODE_TEXT;
   readonly responseText: string = constants.RESPONSE_TEXT;
   readonly promptText: string = constants.PROMPT_TEXT;
   readonly submitText: string = constants.SUBMIT_TEXT;
 
   public mode: string = '';
   public userPrompt: string = '';
-  public chatWithHistory: Array<{ user: string; agent: string }> = [];
-  public response: PromptResponse = new PromptResponse();
+
+  public promptResponse: PromptResponse = new PromptResponse();
 
   @ViewChild('responseBox') responseBox!: ElementRef<HTMLDivElement>;
 
   constructor(
     private readonly processingService: ProcessingService,
     private readonly promptService: PromptService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class Rag implements OnInit {
   private async initializePromptPage(): Promise<void> {
     try {
       await this.processingService.runWithLoader('Loading application...', async () => {
-        this.mode = constants.CHAT_MODE;
+        this.mode = constants.RAG_MODE;
       });
     } catch (e) {
       console.error('Failed to initialize prompt page.', e);
@@ -49,15 +49,6 @@ export class Rag implements OnInit {
 
   public get canPrompt(): boolean {
     return !this.isBusy && this.userPrompt.trim().length > 0;
-  }
-
-  public onModeChange(): void {
-    if (this.mode === constants.CHAT_MODE) {
-      this.response.searchResponse = '';
-    } else if (this.mode === constants.SEARCH_MODE) {
-      this.response.chatResponse = '';
-      this.chatWithHistory = [];
-    }
   }
 
   scrollLastAgentToTop(): void {
@@ -77,21 +68,12 @@ export class Rag implements OnInit {
     }
 
     try {
-      await this.processingService.runWithLoader('Processing your prompt...', async () => {
-        if (this.mode === constants.CHAT_MODE) {
-          this.response = await this.promptService.processChatPrompt(prompt);
-          this.chatWithHistory = [
-            ...this.chatWithHistory,
-            {
-              user: prompt,
-              agent: this.response.chatResponse,
-            },
-          ];
-          this.scrollLastAgentToTop();
-        } else if (this.mode === constants.SEARCH_MODE) {
-          this.response = await this.promptService.processSearchPrompt(prompt);
+      await this.processingService.runWithLoader('Processing for your prompt...', async () => {
+        if (this.mode === constants.RAG_MODE) {
+          this.promptResponse = await this.promptService.processSearchPrompt(prompt);
         }
         this.userPrompt = '';
+        this.cdr.markForCheck();
       });
     } catch (e) {
       console.error('Prompt processing failed.', e);

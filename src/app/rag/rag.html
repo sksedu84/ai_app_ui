@@ -2,15 +2,8 @@
 
   <section class="app__output">
     <div #responseBox class="app__response">
-      @if (mode === 'chat') {
-        @if (chatWithHistory.length > 0) {
-          @for (r of chatWithHistory; track $index) {
-            <div class="user" [innerHTML]="r.user"></div>
-            <div class="agent" [innerHTML]="r.agent"></div>
-          }
-        }
-      } @else if (mode === 'search') {
-        {{ response.searchResponse }}
+      @if (mode === 'rag') {
+        {{ promptResponse.response }}
       }
     </div>
   </section>

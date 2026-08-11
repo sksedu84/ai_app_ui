@@ -11,16 +11,6 @@ export class AdminService {
   constructor(private readonly http: HttpClient) {
   }
 
-  async refreshDatabase(): Promise<AdminResponse> {
-    console.log('Refreshing database...');
-    return firstValueFrom(this.http.get<AdminResponse>(end_points.REFRESH_DATABASE));
-  }
-
-  async refreshDocuments(): Promise<AdminResponse> {
-    console.log('Refreshing documents...');
-    return firstValueFrom(this.http.get<AdminResponse>(end_points.REFRESH_DOCUMENT));
-  }
-
   async uploadFiles(selectedFiles: File[]): Promise<AdminResponse> {
     const fd = new FormData();
     selectedFiles.forEach((file) => {

@@ -14,23 +14,18 @@ export const constants = {
   DATABASE_TEXT: 'Database',
   DOCUMENTS_TEXT: 'Documents',
   DATA_REFRESH_TEXT: 'Data Refresh',
-  CHAT_MODE_TEXT: 'Chat',
-  SEARCH_MODE_TEXT: 'Search in Documents and/or Database',
+  RAG_MODE_TEXT: 'RAG',
   RESPONSE_TEXT: 'AI Response',
   GENERATED_SQL_TEXT: 'Generated SQL',
   EXECUTE_SQL_TEXT: 'Execute SQL',
   PROMPT_TEXT: 'Prompt',
   SUBMIT_TEXT: 'Submit',
-  CHAT_MODE: 'chat',
-  SEARCH_MODE: 'search',
+  RAG_MODE: 'rag',
 } as const;
 
 export const end_points = {
-  CHAT_PROMPT: 'http://localhost:8000/chat/prompt',
-  SEARCH_PROMPT: 'http://localhost:8000/search/prompt',
   ADMIN: 'http://localhost:8000/admin',
   FILE_UPLOAD: 'http://localhost:8000/admin/upload-files',
-  REFRESH_DOCUMENT: 'http://localhost:8000/admin/refresh/document',
-  REFRESH_DATABASE: 'http://localhost:8000/admin/refresh/database',
+  RAG: 'http://localhost:8000/rag',
 } as const;
 
