@@ -1,59 +1,108 @@
-# AI App
+# AI App UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.2.
+A frontend user interface built with Angular. This repository contains the UI for the AI App, including an optional server-side rendering (SSR) entry point and an Express-based server for production SSR.
 
-## Development server
+Key points
+- Angular v22.x (CLI v22.1.2)
+- TypeScript
+- Vitest for unit testing (dev dependency)
+- SSR support via Express (see `serve:ssr:ai_app_ui` script)
 
-To start a local development server, run:
+Tech stack
+- Angular @22
+- TypeScript
+- Express (for SSR)
+- Vitest (testing)
+
+Prerequisites
+- Node.js (>=18)
+- npm (this project used npm@11.16.0; using a modern npm is recommended)
+
+Quick start
+1. Install dependencies:
 
 ```bash
+npm install
+```
+
+2. Start development server (live-reload):
+
+```bash
+npm run start
+# or
 ng serve
 ```
+Open http://localhost:4200 in a browser.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Development helpers
+- Generate components, services, etc. with the Angular CLI, e.g.:
 
 ```bash
-ng generate component component-name
+ng generate component my-component
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Build
+- Development build (watch):
 
 ```bash
-ng generate --help
+npm run watch
 ```
 
-## Building
-
-To build the project run:
+- Production build:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Server-side rendering (SSR)
+- After building the app (ensure SSR/server bundle is produced), run the SSR server:
 
 ```bash
-ng test
+npm run build
+npm run serve:ssr:ai_app_ui
 ```
+This runs the Node server at the path configured in the dist folder (script: `node dist/ai_app_ui/server/server.mjs`). Adjust deployment steps if you use a custom server or platform.
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Testing
+- Run unit tests:
 
 ```bash
-ng e2e
+npm run test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Note: the project includes Vitest as a dev dependency; test configuration may be wired into Angular tooling.
 
-## Additional Resources
+Formatting & tools
+- Prettier is included as a dev dependency. Run it via npx or your editor integration:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npx prettier --check "src/**/*.ts"
+```
+
+Repository scripts (from package.json)
+- npm run start — ng serve (development)
+- npm run build — ng build (production build)
+- npm run watch — ng build --watch --configuration development
+- npm run test — ng test
+- npm run serve:ssr:ai_app_ui — node dist/ai_app_ui/server/server.mjs
+
+Contributing
+- Open issues or create pull requests. Follow typical GitHub workflows:
+  1. Fork the repository
+  2. Create a feature branch
+  3. Run tests and ensure formatting
+  4. Open a pull request with a clear description
+
+License
+- No license specified in this repository. Add a LICENSE file (for example, MIT) if you intend to make this project open source.
+
+Troubleshooting
+- If the dev server fails to start, ensure dependencies are installed and your Node/npm versions meet the prerequisites.
+- If SSR fails to start after build, verify the server bundle exists at `dist/ai_app_ui/server/` and that `node` can run ESM modules (use a recent Node version).
+
+Contact
+- For questions about this repo, add an issue or contact the maintainer.
+
+---
+
+(Consider adding a LICENSE file and a short CONTRIBUTING.md for contributor guidance.)
