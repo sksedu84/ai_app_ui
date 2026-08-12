@@ -11,9 +11,6 @@ import { PromptService } from '../services/prompt.service';
   imports: [FormsModule],
 })
 export class Rag implements OnInit {
-  readonly ragModeText: string = constants.RAG_MODE_TEXT;
-  readonly responseText: string = constants.RESPONSE_TEXT;
-  readonly promptText: string = constants.PROMPT_TEXT;
   readonly submitText: string = constants.SUBMIT_TEXT;
 
   public mode: string = '';
@@ -49,15 +46,6 @@ export class Rag implements OnInit {
 
   public get canPrompt(): boolean {
     return !this.isBusy && this.userPrompt.trim().length > 0;
-  }
-
-  scrollLastAgentToTop(): void {
-    setTimeout(() => {
-      const lastAgent = this.responseBox?.nativeElement.querySelector(
-        '.agent:last-child',
-      ) as HTMLElement | null;
-      lastAgent?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 0);
   }
 
   public async sendPrompt(): Promise<void> {
