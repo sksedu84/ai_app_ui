@@ -1,16 +1,15 @@
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {constants} from '../app.constants';
-import {ProcessingService} from '../services/processing.service';
-import {AdminService} from '../services/admin.service';
-import {AdminResponse} from '../models/adminResponse';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { constants } from '../app.constants';
+import { ProcessingService } from '../services/processing.service';
+import { AdminService } from '../services/admin.service';
+import { AdminResponse } from '../models/adminResponse';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.html',
   styleUrl: './admin.css',
   standalone: true,
-  imports: [CommonModule]
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Admin implements OnInit {
   readonly uploadFileText: string = constants.UPLOAD_FILE_TEXT;
@@ -42,8 +41,7 @@ export class Admin implements OnInit {
   }
 
   get statusText(): string {
-    if (this.uploadedFileNames?.length === 0) return 'No files uploaded yet.';
-    return 'Uploaded file list: ';
+    return this.uploadedFileNames.length === 0 ? 'No files uploaded yet.' : 'Uploaded file list:';
   }
 
   onFilesSelected(event: Event): void {
@@ -57,7 +55,7 @@ export class Admin implements OnInit {
     try {
       await this.processingService.runWithLoader('Uploading files...', async () => {
         const response: AdminResponse = await this.adminService.uploadFiles(this.selectedFiles);
-        await this.loadUploadedFiles(response);
+        this.loadUploadedFiles(response);
       });
       this.selectedFiles = [];
     } catch (e) {
@@ -69,20 +67,15 @@ export class Admin implements OnInit {
     try {
       await this.processingService.runWithLoader('Loading uploaded files...', async () => {
         const response: AdminResponse = await this.adminService.loadAdmin();
-        await this.loadUploadedFiles(response);
+        this.loadUploadedFiles(response);
       });
     } catch (e) {
       console.error('Failed to initialize admin page.', e);
     }
   }
 
-  async loadUploadedFiles(response: AdminResponse): Promise<void> {
-    try {
-      this.uploadedFileNames = response.uploadedFiles ?? [];
-      this.cdr.markForCheck();
-    } catch (e) {
-      console.error('Failed to load uploaded files.', e);
-      this.uploadedFileNames = [];
-    }
+  loadUploadedFiles(response: AdminResponse): void {
+    this.uploadedFileNames = response.uploadedFiles?.slice() ?? [];
+    this.cdr.markForCheck();
   }
 }

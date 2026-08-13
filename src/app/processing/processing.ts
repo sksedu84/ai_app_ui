@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ProcessingService, ProcessingState } from '../services/processing.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-processing',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AsyncPipe],
   templateUrl: './processing.html',
   styleUrl: './processing.css',

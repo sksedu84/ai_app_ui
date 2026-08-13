@@ -1,4 +1,4 @@
-export class PromptResponse {
-  status: string = '';
-  response: string = '';
+export interface PromptResponse {
+  status: string;
+  response: string;
 }

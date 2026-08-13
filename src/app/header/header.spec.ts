@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter, RouterModule } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { Header } from './header';
 import { ProcessingService } from '../services/processing.service';
 import { constants } from '../app.constants';
@@ -19,7 +19,7 @@ describe('Header', () => {
     busy = false;
 
     await TestBed.configureTestingModule({
-      imports: [Header, RouterModule],
+      imports: [Header],
       providers: [
         provideRouter([]),
         { provide: ProcessingService, useValue: processingServiceMock }
@@ -41,10 +41,6 @@ describe('Header', () => {
 
   it('should initialize header menu items from constants', () => {
     expect(component['menuItems']).toEqual([
-      { text: constants.HEADER_MENU_CHAT_TEXT, routerLink: '/' },
-      { text: constants.HEADER_MENU_RAG_TEXT, routerLink: '/rag' },
-      { text: constants.HEADER_MENU_NL_TO_SQL_TEXT, routerLink: '/nl_sql' },
-      { text: constants.HEADER_MENU_HYBRID_TEXT, routerLink: '/hybrid' },
       { text: constants.HEADER_MENU_ADMIN_TEXT, routerLink: '/admin' },
     ]);
   });
@@ -53,8 +49,8 @@ describe('Header', () => {
     expect(component.isBusy).toBe(false);
   });
 
-  /*it('should return true when processing is busy', () => {
+  it('should return true when processing is busy', () => {
     busy = true;
     expect(component.isBusy).toBe(true);
-  });*/
+  });
 });

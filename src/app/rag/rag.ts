@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { constants } from '../app.constants';
 import { PromptResponse } from '../models/promptResponse';
 import { ProcessingService } from '../services/processing.service';
@@ -8,6 +8,8 @@ import { PromptService } from '../services/prompt.service';
 @Component({
   selector: 'app-rag',
   templateUrl: './rag.html',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule],
 })
 export class Rag implements OnInit {
@@ -16,9 +18,7 @@ export class Rag implements OnInit {
   public mode: string = '';
   public userPrompt: string = '';
 
-  public promptResponse: PromptResponse = new PromptResponse();
-
-  @ViewChild('responseBox') responseBox!: ElementRef<HTMLDivElement>;
+  public promptResponse: PromptResponse = { status: '', response: '' };
 
   constructor(
     private readonly processingService: ProcessingService,
@@ -30,14 +30,8 @@ export class Rag implements OnInit {
     void this.initializePromptPage();
   }
 
-  private async initializePromptPage(): Promise<void> {
-    try {
-      await this.processingService.runWithLoader('Loading application...', async () => {
-        this.mode = constants.RAG_MODE;
-      });
-    } catch (e) {
-      console.error('Failed to initialize prompt page.', e);
-    }
+  private initializePromptPage(): void {
+    this.mode = constants.RAG_MODE;
   }
 
   public get isBusy(): boolean {

@@ -1,12 +1,14 @@
-import {Component} from '@angular/core';
-import {constants} from '../app.constants';
-import {ProcessingService} from '../services/processing.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { constants } from '../app.constants';
+import { ProcessingService } from '../services/processing.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.html',
   styleUrl: './header.css',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterLink, RouterLinkActive],
 })
 export class Header {
@@ -18,7 +20,6 @@ export class Header {
   constructor(private readonly processingService: ProcessingService) {}
 
   get isBusy(): boolean {
-    return false;
-    //return this.processingService.isBusy;
+    return this.processingService.isBusy;
   }
 }

@@ -23,9 +23,8 @@ export const constants = {
   RAG_MODE: 'rag',
 } as const;
 
-export const end_points = {
+export const endPoints = {
   ADMIN: 'http://localhost:8000/admin',
   FILE_UPLOAD: 'http://localhost:8000/admin/upload-files',
   RAG: 'http://localhost:8000/rag',
 } as const;
-
