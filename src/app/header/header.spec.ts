@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { Header } from './header';
 import { ProcessingService } from '../services/processing.service';
 import { constants } from '../app.constants';
@@ -7,22 +8,16 @@ import { constants } from '../app.constants';
 describe('Header', () => {
   let component: Header;
   let fixture: ComponentFixture<Header>;
-  let busy = false;
-
-  const processingServiceMock = {
-    get isBusy(): boolean {
-      return busy;
-    }
-  };
+  let processingState: BehaviorSubject<{ busy: boolean; message: string }>;
 
   beforeEach(async () => {
-    busy = false;
+    processingState = new BehaviorSubject<{ busy: boolean; message: string }>({ busy: false, message: '' });
 
     await TestBed.configureTestingModule({
       imports: [Header],
       providers: [
         provideRouter([]),
-        { provide: ProcessingService, useValue: processingServiceMock }
+        { provide: ProcessingService, useValue: { state$: processingState.asObservable() } }
       ]
     }).compileComponents();
 
@@ -45,12 +40,16 @@ describe('Header', () => {
     ]);
   });
 
-  it('should return false when processing is not busy', () => {
-    expect(component.isBusy).toBe(false);
-  });
+  it('should clear disabled links when processing finishes', () => {
+    processingState.next({ busy: true, message: 'Uploading files...' });
+    fixture.detectChanges();
 
-  it('should return true when processing is busy', () => {
-    busy = true;
-    expect(component.isBusy).toBe(true);
+    const titleLink = fixture.nativeElement.querySelector('.site-header__title-link');
+    expect(titleLink.classList).toContain('is-disabled');
+
+    processingState.next({ busy: false, message: '' });
+    fixture.detectChanges();
+
+    expect(titleLink.classList).not.toContain('is-disabled');
   });
 });
