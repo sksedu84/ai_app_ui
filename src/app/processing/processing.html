@@ -3,6 +3,7 @@
     <div class="page-spinner" role="status" aria-live="polite" aria-busy="true">
       <div class="page-spinner__content">
         <div class="page-spinner__ring"></div>
+        <p class="page-spinner__elapsed">{{ elapsedTime$ | async }}</p>
         <p class="page-spinner__text">{{ state.message || 'Please wait...' }}</p>
       </div>
     </div>

@@ -29,6 +29,15 @@
   animation: page-spinner-rotate 0.8s linear infinite;
 }
 
+.page-spinner__elapsed {
+  margin: 0;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  text-align: center;
+}
+
 .page-spinner__text {
   margin: 0;
   font-size: 14px;
