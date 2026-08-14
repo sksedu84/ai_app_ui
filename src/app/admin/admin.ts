@@ -78,4 +78,16 @@ export class Admin implements OnInit {
     this.uploadedFileNames = response.uploadedFiles?.slice() ?? [];
     this.cdr.markForCheck();
   }
+
+  protected async refreshDocuments() {
+    if (this.isBusy) return;
+    try {
+      await this.processingService.runWithLoader('Documents ingesting...', async () => {
+        const response: AdminResponse = await this.adminService.refreshDocuments();
+        this.loadUploadedFiles(response);
+      });
+    } catch (e) {
+      console.error('Document refresh failed.', e);
+    }
+  }
 }

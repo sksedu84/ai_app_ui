@@ -11,8 +11,8 @@ export const constants = {
     'text/plain',
   UPLOAD_FILE_TEXT: 'Upload files (PDF, DOC, DOCX, TXT)',
   UPLOAD_BUTTON_TEXT: 'Upload',
-  DATABASE_TEXT: 'Database',
-  DOCUMENTS_TEXT: 'Documents',
+  DATABASE_TEXT: 'Database Refresh',
+  DOCUMENTS_TEXT: 'Document Ingestion',
   DATA_REFRESH_TEXT: 'Data Refresh',
   RAG_MODE_TEXT: 'RAG',
   RESPONSE_TEXT: 'AI Response',
@@ -27,4 +27,5 @@ export const endPoints = {
   ADMIN: 'http://localhost:8000/admin',
   FILE_UPLOAD: 'http://localhost:8000/admin/upload-files',
   RAG: 'http://localhost:8000/rag',
+  REFRESH_DOCUMENT: 'http://localhost:8000/admin/refresh/document',
 } as const;
