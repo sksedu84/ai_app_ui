@@ -54,11 +54,12 @@ export class Rag implements OnInit {
         if (this.mode === constants.RAG_MODE) {
           this.promptResponse = await this.promptService.processSearchPrompt(prompt);
         }
-        this.userPrompt = '';
-        this.cdr.markForCheck();
       });
     } catch (e) {
       console.error('Prompt processing failed.', e);
+    } finally {
+      this.userPrompt = '';
+      this.cdr.markForCheck();
     }
   }
 }

@@ -18,8 +18,14 @@ export class Header {
     { text: constants.HEADER_MENU_ADMIN_TEXT, routerLink: '/admin' },
   ];
   protected readonly state$;
+  protected readonly errorMessage$;
 
-  constructor(processingService: ProcessingService) {
+  constructor(private readonly processingService: ProcessingService) {
     this.state$ = processingService.state$;
+    this.errorMessage$ = processingService.errorMessage$;
+  }
+
+  protected clearError(): void {
+    this.processingService.clearError();
   }
 }

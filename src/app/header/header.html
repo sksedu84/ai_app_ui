@@ -1,4 +1,14 @@
 @if (state$ | async; as state) {
+  @if (errorMessage$ | async; as errorMessage) {
+    @if (errorMessage) {
+      <div class="site-error" role="alert" aria-live="assertive">
+        <p class="site-error__text">{{ errorMessage }}</p>
+        <button class="site-error__close" type="button" (click)="clearError()" aria-label="Dismiss error message">
+          Dismiss
+        </button>
+      </div>
+    }
+  }
   <header class="site-header">
     <div class="site-header__inner">
       <div class="site-header__brand">

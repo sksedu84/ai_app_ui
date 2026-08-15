@@ -60,6 +60,8 @@ export class Admin implements OnInit {
       this.selectedFiles = [];
     } catch (e) {
       console.error('Upload failed', e);
+    } finally {
+      this.cdr.markForCheck();
     }
   }
 
@@ -71,6 +73,8 @@ export class Admin implements OnInit {
       });
     } catch (e) {
       console.error('Failed to initialize admin page.', e);
+    } finally {
+      this.cdr.markForCheck();
     }
   }
 
@@ -88,6 +92,8 @@ export class Admin implements OnInit {
       });
     } catch (e) {
       console.error('Document refresh failed.', e);
+    } finally {
+      this.cdr.markForCheck();
     }
   }
 }
