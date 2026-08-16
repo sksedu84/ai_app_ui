@@ -1,11 +1,11 @@
 <main class="app">
 
   <section class="app__output">
-    <div #responseBox class="app__response">
-      @if (mode === 'rag') {
-        {{ promptResponse.response }}
-      }
-    </div>
+    @if (mode === 'rag') {
+      <div #responseBox class="app__response"
+           [innerHTML]="promptResponse.response">
+      </div>
+    }
   </section>
 
   <section class="app__input">

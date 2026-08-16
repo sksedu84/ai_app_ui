@@ -70,6 +70,15 @@ html, body {
   gap: 10px;
   white-space: normal;
   word-break: break-word;
+  text-align: justify;
+}
+
+.app__response > :first-child {
+  margin-top: 0;
+}
+
+.app__response > :last-child {
+  margin-bottom: 0;
 }
 
 .user,
@@ -180,5 +189,3 @@ html, body {
     min-height: auto;
   }
 }
-
-
