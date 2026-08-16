@@ -37,10 +37,10 @@
     <h2 class="uploader__title">{{ dataRefreshText }}</h2>
 
     <div class="uploader__controls">
-      <!--<button class="uploader__btn" type="button" [disabled]="isBusy" (click)="refreshDatabase()">
+      <button class="uploader__btn" type="button" [disabled]="isBusy" (click)="refreshDatabase()">
         {{ databaseText }}
-      </button>-->
-      <button class="uploader__btn" type="button" [disabled]="isBusy" (click)="refreshDocuments()">
+      </button>
+      <button class="uploader__btn" type="button" [disabled]="isBusy" (click)="ingestDocuments()">
         {{ documentsText }}
       </button>
     </div>

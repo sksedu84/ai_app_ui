@@ -83,15 +83,28 @@ export class Admin implements OnInit {
     this.cdr.markForCheck();
   }
 
-  protected async refreshDocuments() {
+  protected async ingestDocuments() {
     if (this.isBusy) return;
     try {
-      await this.processingService.runWithLoader('Documents ingesting...', async () => {
-        const response: AdminResponse = await this.adminService.refreshDocuments();
+      await this.processingService.runWithLoader('Ingesting documents...', async () => {
+        const response: AdminResponse = await this.adminService.ingestDocuments();
         this.loadUploadedFiles(response);
       });
     } catch (e) {
-      console.error('Document refresh failed.', e);
+      console.error('Document ingestion failed.', e);
+    } finally {
+      this.cdr.markForCheck();
+    }
+  }
+
+  protected async refreshDatabase() {
+    if (this.isBusy) return;
+    try {
+      await this.processingService.runWithLoader('Refreshing database...', async () => {
+        await this.adminService.refreshDatabase();
+      });
+    } catch (e) {
+      console.error('Database refresh failed.', e);
     } finally {
       this.cdr.markForCheck();
     }

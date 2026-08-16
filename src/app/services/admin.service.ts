@@ -23,8 +23,13 @@ export class AdminService {
     return firstValueFrom(this.http.get<AdminResponse>(endPoints.ADMIN));
   }
 
-  async refreshDocuments() {
-    console.log('Refreshing documents...');
-    return firstValueFrom(this.http.get<AdminResponse>(endPoints.REFRESH_DOCUMENT));
+  async ingestDocuments() {
+    console.log('Ingesting documents...');
+    return firstValueFrom(this.http.get<AdminResponse>(endPoints.URL_INGEST_DOCUMENTS));
+  }
+
+  async refreshDatabase() {
+    console.log('Refreshing database...');
+    return firstValueFrom(this.http.get<AdminResponse>(endPoints.URL_REFRESH_DOCUMENT));
   }
 }
