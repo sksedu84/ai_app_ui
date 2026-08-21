@@ -1,108 +1,112 @@
-# AI App UI
+# AI Assistant UI
 
-A frontend user interface built with Angular. This repository contains the UI for the AI App, including an optional server-side rendering (SSR) entry point and an Express-based server for production SSR.
+This repository contains the Angular frontend for an AI-powered assistant. The app provides a prompt-driven search/RAG workflow and an admin screen for uploading documents, ingesting them into the data store, and refreshing the database.
 
-Key points
-- Angular v22.x (CLI v22.1.2)
+## What this app does
+
+- Root page: a prompt interface for submitting questions to the AI backend
+- Admin page: file upload for PDF, DOC, DOCX, and TXT documents
+- Document ingestion and database refresh actions
+- Loading and error states for long-running backend operations
+- Angular 22 single-page app with SSR support in the project setup
+
+## Tech stack
+
+- Angular 22
 - TypeScript
-- Vitest for unit testing (dev dependency)
-- SSR support via Express (see `serve:ssr:ai_app_ui` script)
+- RxJS
+- Angular SSR / Express support
+- Prettier for formatting
+- Vitest and Angular testing setup
 
-Tech stack
-- Angular @22
-- TypeScript
-- Express (for SSR)
-- Vitest (testing)
+## Project structure
 
-Prerequisites
-- Node.js (>=18)
-- npm (this project used npm@11.16.0; using a modern npm is recommended)
+```text
+src/
+  app/
+    admin/              # Admin document upload and data refresh UI
+    header/             # Top navigation header
+    processing/         # Loading indicator and timer UI
+    rag/                # Prompt / RAG interface
+    services/           # HTTP clients for backend endpoints
+    models/             # Shared response models
+    app.constants.ts    # App title and backend endpoint constants
+    app.routes.ts       # Route config
+    app.ts              # Root app component
+  main.ts
+  styles.css
+angular.json
+package.json
+```
 
-Quick start
+## Prerequisites
+
+- Node.js 18+
+- npm 11+
+
+## Quick start
+
 1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Start development server (live-reload):
+2. Start the Angular dev server:
 
 ```bash
 npm run start
-# or
-ng serve
 ```
-Open http://localhost:4200 in a browser.
 
-Development helpers
-- Generate components, services, etc. with the Angular CLI, e.g.:
+3. Open the app in a browser:
+
+```text
+http://localhost:4200
+```
+
+## Backend requirements
+
+The UI expects a backend API to be running on localhost:8000. The current Angular client calls these endpoints:
+
+- `GET http://localhost:8000/admin`
+- `POST http://localhost:8000/admin/upload-files`
+- `GET http://localhost:8000/admin/ingest/documents`
+- `GET http://localhost:8000/admin/refresh/database`
+- `GET http://localhost:8000/rag?prompt=...`
+
+If the backend is not running, the UI may appear to load but the admin and RAG actions will fail.
+
+## Available scripts
 
 ```bash
-ng generate component my-component
+npm run start          # Angular dev server on port 4200
+npm run build          # Production build
+npm run watch          # Watch-mode development build
+npm run test           # Run the Angular test suite
+npm run serve:ssr:ai_app_ui   # Serve the SSR output bundle
 ```
 
-Build
-- Development build (watch):
+## Development workflow
+
+Use the Angular CLI for component and service generation:
 
 ```bash
-npm run watch
+npx ng generate component my-component
 ```
 
-- Production build:
-
-```bash
-npm run build
-```
-
-Server-side rendering (SSR)
-- After building the app (ensure SSR/server bundle is produced), run the SSR server:
-
-```bash
-npm run build
-npm run serve:ssr:ai_app_ui
-```
-This runs the Node server at the path configured in the dist folder (script: `node dist/ai_app_ui/server/server.mjs`). Adjust deployment steps if you use a custom server or platform.
-
-Testing
-- Run unit tests:
-
-```bash
-npm run test
-```
-
-Note: the project includes Vitest as a dev dependency; test configuration may be wired into Angular tooling.
-
-Formatting & tools
-- Prettier is included as a dev dependency. Run it via npx or your editor integration:
+For formatting:
 
 ```bash
 npx prettier --check "src/**/*.ts"
 ```
 
-Repository scripts (from package.json)
-- npm run start — ng serve (development)
-- npm run build — ng build (production build)
-- npm run watch — ng build --watch --configuration development
-- npm run test — ng test
-- npm run serve:ssr:ai_app_ui — node dist/ai_app_ui/server/server.mjs
+## Notes
 
-Contributing
-- Open issues or create pull requests. Follow typical GitHub workflows:
-  1. Fork the repository
-  2. Create a feature branch
-  3. Run tests and ensure formatting
-  4. Open a pull request with a clear description
+- The default app route is the RAG prompt UI.
+- The admin route is `/admin`.
+- Uploaded file types are limited to PDF, DOC, DOCX, and TXT.
+- The app is set up to support SSR, but the main local development flow is the Angular dev server, not the SSR server.
 
-License
-- No license specified in this repository. Add a LICENSE file (for example, MIT) if you intend to make this project open source.
+## License
 
-Troubleshooting
-- If the dev server fails to start, ensure dependencies are installed and your Node/npm versions meet the prerequisites.
-- If SSR fails to start after build, verify the server bundle exists at `dist/ai_app_ui/server/` and that `node` can run ESM modules (use a recent Node version).
-
-Contact
-- For questions about this repo, add an issue or contact the maintainer.
-
----
-
-(Consider adding a LICENSE file and a short CONTRIBUTING.md for contributor guidance.)
+This repository does not currently include a license file.
